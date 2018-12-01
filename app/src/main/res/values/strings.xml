@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">PopularMovies</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_placeholder">Placeholder image for movies</string>
+</resources>
