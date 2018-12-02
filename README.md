@@ -3,7 +3,7 @@
 
 Popular Movies app Stage 1 is part of Udacity Android nanodegree projects.
 
-The app uses service - http://api.themoviedb.org/3/movie/popular to fetch most popular or highest rated movies and display to the users. 
+The app uses service - http://api.themoviedb.org/ to fetch most popular or highest rated movies and display to the users. 
 
 User can change sort order from settings menu
 
