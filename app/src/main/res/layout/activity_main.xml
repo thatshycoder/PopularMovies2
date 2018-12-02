@@ -10,7 +10,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/recycler_view">
-
 </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/detail_spacing"
+        android:layout_marginStart="@dimen/detail_spacing"
+        android:layout_marginTop="@dimen/detail_spacing"
+        android:textSize="@dimen/overview"
+        android:text="@string/offline"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="offline" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

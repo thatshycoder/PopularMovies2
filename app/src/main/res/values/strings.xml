@@ -1,6 +1,28 @@
 <resources>
     <string name="app_name">PopularMovies</string>
 
+    <!-- Menu -->
+    <string name="settings">Settings</string>
+
+    <!-- Settings -->
+    <string name="sort">Sort by</string>
+    <string name="sort_summary">Change how the movies are sorted</string>
+    <string name="sort_key">sort_by</string>
+    <string name="sort_popular">popular</string>
+    <string name="sort_top_rated">top_rated</string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top Rated</string>
+
+    <!-- Error message -->
+    <string name="offline">You\'re currently offline. Please enable internet connection</string>
+
     <!-- Content descriptions -->
     <string name="cd_placeholder">Placeholder image for movies</string>
+
+    <!-- Intent extra -->
+    <string name="poster_path_extra">poster_path</string>
+    <string name="title_extra">title</string>
+    <string name="released_date_extra">released_date</string>
+    <string name="average_rating_extra">vote_average</string>
+    <string name="overview_extra">overview</string>
 </resources>
