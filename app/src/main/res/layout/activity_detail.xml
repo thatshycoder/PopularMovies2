@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".DetailActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/movie_cover"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/cover_image_height"
+            android:adjustViewBounds="false"
+            android:contentDescription="@string/cd_placeholder"
+            android:foreground="#f51a1a1a"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/placeholder" />
+
+        <ImageView
+            android:id="@+id/movie_poster"
+            android:layout_width="@dimen/poster_thumbnail_size"
+            android:layout_height="@dimen/poster_thumbnail_size"
+            android:layout_marginStart="@dimen/detail_spacing"
+            android:adjustViewBounds="false"
+            android:contentDescription="@string/cd_placeholder"
+            android:cropToPadding="false"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/movie_cover"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/movie_cover"
+            app:layout_constraintTop_toBottomOf="@+id/movie_cover"
+            app:layout_constraintVertical_bias="0.110000014"
+            app:srcCompat="@drawable/placeholder" />
+
+        <TextView
+            android:id="@+id/released_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_spacing"
+            android:layout_marginTop="@dimen/detail_spacing"
+            android:textSize="@dimen/detail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/movie_poster"
+            app:layout_constraintTop_toBottomOf="@+id/movie_cover"
+            tools:text="TextView" />
+
+        <TextView
+            android:id="@+id/overview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/title_spacing"
+            android:layout_marginEnd="@dimen/detail_spacing"
+            android:layout_marginTop="@dimen/detail_spacing"
+            android:textSize="@dimen/overview"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/movie_poster"
+            app:layout_constraintTop_toBottomOf="@+id/movie_poster"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="TextView" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/title_spacing"
+            android:layout_marginStart="@dimen/title_spacing"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/title"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_cover"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/movie_cover"
+            app:layout_constraintTop_toTopOf="@+id/movie_cover"
+            tools:text="TextView" />
+
+        <TextView
+            android:id="@+id/average_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_spacing"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/overview"
+            app:layout_constraintStart_toStartOf="@+id/released_year"
+            app:layout_constraintTop_toBottomOf="@+id/released_year"
+            tools:text="TextView" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
