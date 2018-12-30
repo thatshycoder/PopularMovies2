@@ -5,7 +5,7 @@ Popular Movies app Stage 2 is part of Udacity Android nanodegree projects.
 
 The app uses service - http://api.themoviedb.org/ to fetch most popular or highest rated movies(including their details<trailers, reviews etc>) and display to the users. 
 
-The app uses ROOM and other android architecture to store and properly fetch user's favorite movies.
+The app uses ROOM and other android architecture components to store and properly fetch user's favorite movies.
 
 User can change sort order from settings menu
 
