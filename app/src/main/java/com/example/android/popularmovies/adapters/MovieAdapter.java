@@ -1,5 +1,6 @@
 package com.example.android.popularmovies.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -21,11 +22,11 @@ import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    private Context mContext;
+    private Activity mContext;
     private ArrayList<Movie> mMovieList;
     private Movie mMovie;
 
-    public MovieAdapter(Context mContext, ArrayList<Movie> movieList) {
+    public MovieAdapter(Activity mContext, ArrayList<Movie> movieList) {
         this.mContext = mContext;
         mMovieList = movieList;
     }
@@ -68,6 +69,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
                 Intent intent = new Intent(mContext, DetailActivity.class);
                 intent.putExtra("Movie", mMovie);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });

@@ -142,7 +142,7 @@ public class DetailActivity extends AppCompatActivity {
         mTrailerRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         mReviewsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mTrailerAdapter = new TrailerAdapter(getApplicationContext(), mTrailerList);
+        mTrailerAdapter = new TrailerAdapter(DetailActivity.this, mTrailerList);
         mTrailerRecyclerView.setAdapter(mTrailerAdapter);
 
         mReviewsAdapter = new ReviewsAdapter(getApplicationContext(), mReviewsList);

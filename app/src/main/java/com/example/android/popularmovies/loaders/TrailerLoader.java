@@ -59,7 +59,7 @@ public class TrailerLoader extends AsyncTaskLoader<Trailers> {
     }
 
     /*
-     * Method fetches trailers from api
+     * Method shows corresponding error messages when there are no trailers
      */
     private void getTrailers(String id) {
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PopularMovies</string>
+    <string name="app_name">Movies Repository</string>
 
     <!-- Menu -->
     <string name="settings">Settings</string>

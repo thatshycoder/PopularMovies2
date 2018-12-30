@@ -97,10 +97,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         LinearLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mMovieAdapter = new MovieAdapter(getApplicationContext(), mMovieList);
+        mMovieAdapter = new MovieAdapter(MainActivity.this, mMovieList);
 
         // display favorite movies if sort order is by favorite
-        if (mSortOrder.equals("favorite")) {
+        if (mSortOrder.equals(getString(R.string.sort_favorite))) {
 
             LiveData<List<Movie>> movies = mDb.favoriteDao().loadFavorites();
             movies.observe(this, new Observer<List<Movie>>() {

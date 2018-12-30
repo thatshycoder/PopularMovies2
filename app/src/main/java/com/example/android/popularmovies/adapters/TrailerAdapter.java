@@ -1,5 +1,6 @@
 package com.example.android.popularmovies.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -23,11 +24,11 @@ import java.util.ArrayList;
 
 public class TrailerAdapter extends RecyclerView.Adapter<com.example.android.popularmovies.adapters.TrailerAdapter.TrailerViewHolder> {
 
-    private Context mContext;
+    private Activity mContext;
     private ArrayList<Trailers> mTrailerList;
     private Trailers mTrailer;
 
-    public TrailerAdapter(Context mContext, ArrayList<Trailers> trailerList) {
+    public TrailerAdapter(Activity mContext, ArrayList<Trailers> trailerList) {
         this.mContext = mContext;
         mTrailerList = trailerList;
     }
@@ -67,11 +68,11 @@ public class TrailerAdapter extends RecyclerView.Adapter<com.example.android.pop
             public void onClick(View view) {
 
                 // start intent to youtube
-
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + videoKey));
                 Intent chooser = Intent.createChooser(intent, "Open With");
 
                 if (intent.resolveActivity(mContext.getPackageManager()) != null) {
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(chooser);
                 }
             }
