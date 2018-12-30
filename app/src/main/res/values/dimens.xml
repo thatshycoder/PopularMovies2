@@ -11,4 +11,13 @@
     <dimen name="detail">22sp</dimen>
     <dimen name="title">28sp</dimen>
     <dimen name="overview">18sp</dimen>
+    <dimen name="trailer">8dp</dimen>
+
+    <!-- Thumbnail -->
+    <dimen name="trailer_thumbnail_size">150dp</dimen>
+    <dimen name="ic_play">40dp</dimen>
+
+    <!-- Reviews -->
+    <dimen name="review_content">16sp</dimen>
+    <dimen name="review_author">14sp</dimen>
 </resources>

@@ -10,11 +10,18 @@
     <string name="sort_key">sort_by</string>
     <string name="sort_popular">popular</string>
     <string name="sort_top_rated">top_rated</string>
+    <string name="sort_favorite">favorite</string>
     <string name="popular">Popular</string>
     <string name="top_rated">Top Rated</string>
+    <string name="favorite">Favorite</string>
 
     <!-- Error message -->
     <string name="offline">You\'re currently offline. Please enable internet connection</string>
+    <string name="no_fave">You don\'t have any favorite movies yet</string>
+    <string name="no_reviews">There are no reviews available for this movie</string>
+    <string name="no_trailer">There are no trailers available for this movie</string>
+    <string name="no_conn_reviews">You\'re currently offline. Please go online to view reviews</string>
+    <string name="no_conn_trailer">You\'re currently offline. Please go online to view trailers</string>
 
     <!-- Content descriptions -->
     <string name="cd_placeholder">Placeholder image for movies</string>
@@ -25,4 +32,8 @@
     <string name="released_date_extra">released_date</string>
     <string name="average_rating_extra">vote_average</string>
     <string name="overview_extra">overview</string>
+
+    <!-- Details screen -->
+    <string name="movie_trailer">Trailer</string>
+    <string name="movie_reviews">Reviews</string>
 </resources>

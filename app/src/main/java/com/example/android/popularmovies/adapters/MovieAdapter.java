@@ -1,15 +1,19 @@
-package com.example.android.popularmovies;
+package com.example.android.popularmovies.adapters;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.android.popularmovies.DetailActivity;
+import com.example.android.popularmovies.R;
 import com.example.android.popularmovies.model.Movie;
+import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.squareup.picasso.Picasso;
 
@@ -19,6 +23,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     private Context mContext;
     private ArrayList<Movie> mMovieList;
+    private Movie mMovie;
 
     public MovieAdapter(Context mContext, ArrayList<Movie> movieList) {
         this.mContext = mContext;
@@ -41,25 +46,28 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(@NonNull MovieAdapter.MovieViewHolder viewHolder, int position) {
 
-        Object getrow = this.mMovieList.get(position);
-        final LinkedTreeMap<Object, Object> t = (LinkedTreeMap) getrow;
+        Gson gs = new Gson();
+        String js = gs.toJson(mMovieList.get(position));
+        final Movie movieModel = gs.fromJson(js, Movie.class);
 
         Picasso.get()
-                .load("https://image.tmdb.org/t/p/w185" + t.get("poster_path"))
+                .load("https://image.tmdb.org/t/p/w185" + movieModel.getPoster_path())
                 .error(R.drawable.placeholder)
                 .into(viewHolder.moviePoster);
 
         viewHolder.moviePoster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // add details to intent
+                mMovie = new Movie(movieModel.getId(), movieModel.getTitle(),
+                        movieModel.getRelease_date(),
+                        movieModel.getVote_average(),
+                        movieModel.getPoster_path(),
+                        movieModel.getOverview());
+
                 Intent intent = new Intent(mContext, DetailActivity.class);
-
-                intent.putExtra(mContext.getString(R.string.poster_path_extra), t.get("poster_path").toString());
-                intent.putExtra(mContext.getString(R.string.title_extra), t.get("original_title").toString());
-                intent.putExtra(mContext.getString(R.string.released_date_extra), t.get("release_date").toString());
-                intent.putExtra(mContext.getString(R.string.overview_extra), t.get("overview").toString());
-                intent.putExtra(mContext.getString(R.string.average_rating_extra), t.get("vote_average").toString());
-
+                intent.putExtra("Movie", mMovie);
                 mContext.startActivity(intent);
             }
         });

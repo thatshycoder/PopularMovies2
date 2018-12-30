@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#111111"
     android:fillViewport="true"
     tools:context=".DetailActivity">
 
@@ -33,6 +34,7 @@
             android:contentDescription="@string/cd_placeholder"
             android:cropToPadding="false"
             android:scaleType="centerCrop"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/movie_cover"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -47,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_spacing"
             android:layout_marginTop="@dimen/detail_spacing"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/detail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -58,16 +61,14 @@
             android:id="@+id/overview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/title_spacing"
             android:layout_marginEnd="@dimen/detail_spacing"
             android:layout_marginTop="@dimen/detail_spacing"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/overview"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/movie_poster"
             app:layout_constraintTop_toBottomOf="@+id/movie_poster"
-            app:layout_constraintVertical_bias="0.0"
             tools:text="TextView" />
 
         <TextView
@@ -96,6 +97,111 @@
             app:layout_constraintStart_toStartOf="@+id/released_year"
             app:layout_constraintTop_toBottomOf="@+id/released_year"
             tools:text="TextView" />
+
+        <ImageView
+            android:id="@+id/btn_fave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_cover"
+            app:layout_constraintEnd_toEndOf="@+id/movie_cover"
+            app:layout_constraintStart_toEndOf="@+id/released_year"
+            app:layout_constraintTop_toBottomOf="@+id/movie_cover"
+            app:srcCompat="@drawable/ic_unfave" />
+
+        <ImageView
+            android:id="@+id/btn_unfave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/movie_cover"
+            app:layout_constraintEnd_toEndOf="@+id/movie_cover"
+            app:layout_constraintStart_toEndOf="@+id/released_year"
+            app:layout_constraintTop_toBottomOf="@+id/movie_cover"
+            app:srcCompat="@drawable/ic_fave" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_spacing"
+            android:text="@string/movie_trailer"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/detail"
+            app:layout_constraintBottom_toTopOf="@+id/trailer_rv"
+            app:layout_constraintEnd_toEndOf="@+id/overview"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/overview"
+            app:layout_constraintTop_toBottomOf="@+id/overview"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/movie_reviews"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/detail"
+            app:layout_constraintBottom_toTopOf="@+id/reviews_rv"
+            app:layout_constraintEnd_toEndOf="@+id/overview"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/overview"
+            app:layout_constraintTop_toBottomOf="@+id/trailer_rv" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/trailer_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/detail_spacing"
+            android:layout_marginTop="@dimen/detail_spacing"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="@+id/overview"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/reviews_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="@dimen/detail_spacing"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/trailer_rv"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/reviews_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/detail_spacing"
+            android:layout_marginTop="@dimen/detail_spacing"
+            android:text="@string/no_reviews"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/reviews_rv"
+            app:layout_constraintEnd_toEndOf="@+id/overview"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/trailer_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/detail_spacing"
+            android:layout_marginTop="@dimen/detail_spacing"
+            android:text="@string/no_trailer"
+            android:textColor="@android:color/white"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/trailer_rv"
+            app:layout_constraintEnd_toEndOf="@+id/overview"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.0" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

@@ -1,10 +1,12 @@
-package com.example.android.popularmovies;
+package com.example.android.popularmovies.loaders;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 import com.example.android.popularmovies.model.Movie;
+import com.example.android.popularmovies.model.Reviews;
+import com.example.android.popularmovies.model.Trailers;
 import com.example.android.popularmovies.utils.MoviesApiClient;
 import com.example.android.popularmovies.utils.MoviesApiInterface;
 
@@ -18,9 +20,13 @@ public class MovieLoader extends AsyncTaskLoader<Movie> {
     private static final String TAG = "MoviesLoader";
     private static final String API_KEY = "";
     private Response<Movie> mMovies;
+    private Response<Reviews> mReviews;
     private Movie mData;
     private String mSortOrder;
 
+    public MovieLoader(Context context) {
+        super(context);
+    }
     public MovieLoader(Context context, String sort_order) {
         super(context);
         mSortOrder = sort_order;
@@ -56,7 +62,9 @@ public class MovieLoader extends AsyncTaskLoader<Movie> {
         super.deliverResult(data);
     }
 
-    // fetch the data using the api
+    /*
+     * Method fetches movie from api
+     */
     private void getMovies() {
 
         MoviesApiInterface moviesApiInterface = MoviesApiClient.getClient();
