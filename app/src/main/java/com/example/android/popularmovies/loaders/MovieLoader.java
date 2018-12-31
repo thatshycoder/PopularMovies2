@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
+import com.example.android.popularmovies.R;
 import com.example.android.popularmovies.model.Movie;
 import com.example.android.popularmovies.model.Reviews;
 import com.example.android.popularmovies.model.Trailers;
@@ -23,12 +24,17 @@ public class MovieLoader extends AsyncTaskLoader<Movie> {
     private Response<Reviews> mReviews;
     private Movie mData;
     private String mSortOrder;
+    private Context mContext;
 
     public MovieLoader(Context context) {
         super(context);
+
+        mContext = context;
     }
     public MovieLoader(Context context, String sort_order) {
         super(context);
+
+        mContext = context;
         mSortOrder = sort_order;
     }
 
@@ -66,15 +72,17 @@ public class MovieLoader extends AsyncTaskLoader<Movie> {
      * Method fetches movie from api
      */
     private void getMovies() {
+        String sortPopular = mContext.getString(R.string.sort_popular);
+        String sortTopRated = mContext.getString(R.string.sort_top_rated);
 
         MoviesApiInterface moviesApiInterface = MoviesApiClient.getClient();
         Call<Movie> callBackend;
 
-        if (mSortOrder.equals("popular")) {
-            callBackend = moviesApiInterface.getPopularMovies(API_KEY);
+        if (mSortOrder.equals(sortPopular)) {
+            callBackend = moviesApiInterface.getMovies(sortPopular, API_KEY);
 
         } else {
-            callBackend = moviesApiInterface.getTopRatedMovies(API_KEY);
+            callBackend = moviesApiInterface.getMovies(sortTopRated, API_KEY);
         }
 
         try {

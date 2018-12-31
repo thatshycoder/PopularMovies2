@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -61,6 +63,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private AppDatabase mDb;
 
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    private static final String KEY_INSTANCE_STATE_RV_POSITION = "state";
+
+    private Parcelable mLayoutManagerSavedState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,17 +86,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         mSortOrder = sharedPreferences.getString(getString(R.string.sort_key), getString(R.string.sort_popular));
 
-        // check network connectivity and display error if offline
-        ConnectivityManager connectivityManager =
-                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
-
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
-
         // phone is offline and sort order is not by favorites
-        if (!isConnected && !mSortOrder.equals(getString(R.string.sort_favorite))) {
+        if (!isNetworkAvailable(this) && !mSortOrder.equals(getString(R.string.sort_favorite))) {
             showError();
             return;
         }
@@ -96,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // set the recyclerview layout to grid
         LinearLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(layoutManager);
+
+        mLayoutManager = mRecyclerView.getLayoutManager();
 
         mMovieAdapter = new MovieAdapter(MainActivity.this, mMovieList);
 
@@ -124,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             // initialize loader
             mLoaderManager = LoaderManager.getInstance(this);
             mLoaderManager.initLoader(0, null, this);
+
         }
 
         mRecyclerView.setAdapter(mMovieAdapter);
@@ -154,6 +156,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             if (mMovieList != null) {
                 mMovieAdapter.setMovieList(mMovieList);
                 mMovieAdapter.notifyDataSetChanged();
+
+                if (mLayoutManagerSavedState != null) {
+                    mLayoutManager.onRestoreInstanceState(mLayoutManagerSavedState);
+                }
             }
 
         } else {
@@ -196,6 +202,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mRecyclerView.setVisibility(View.GONE);
     }
 
+    /**
+     * Checks if network is available
+     *
+     * @param context
+     * @return boolean
+     */
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -205,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.settings:
@@ -244,4 +263,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(KEY_INSTANCE_STATE_RV_POSITION, mLayoutManager.onSaveInstanceState());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // restore recycler view at same position
+        if (savedInstanceState != null) {
+            mLayoutManagerSavedState = savedInstanceState.getParcelable(KEY_INSTANCE_STATE_RV_POSITION);
+        }
+    }
+
 }

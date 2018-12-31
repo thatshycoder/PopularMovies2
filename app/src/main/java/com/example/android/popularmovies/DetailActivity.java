@@ -112,17 +112,8 @@ public class DetailActivity extends AppCompatActivity {
         final Movie movie = intent.getParcelableExtra("Movie");
         mId = String.valueOf(movie.getId());
 
-        // check network connectivity and display error if offline
-        ConnectivityManager connectivityManager =
-                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
-
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
-
-        // phone is offline and sort order is not by favorites
-        if (isConnected) {
+        // phone is online
+        if (MainActivity.isNetworkAvailable(this)) {
             // initialize loader
             mLoaderManager = LoaderManager.getInstance(this);
 
